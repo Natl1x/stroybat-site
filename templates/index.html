@@ -3,6 +3,10 @@
 {% block title %}Головна — StroyBat{% endblock %}
 
 {% block content %}
-<h1>StroyBat</h1>
-<p>Будівництво та ремонт.</p>
+<div class="clean-page">
+    <section class="clean-hero"><p class="eyebrow">Будівництво · ремонт · дизайн</p><h1>Простір, у якому <span>хочеться жити.</span></h1><p>StroyBat перетворює ідеї на продумані будинки, квартири та комерційні простори. Ведемо проєкт від першого ескізу до фінального результату.</p><div class="clean-actions"><a class="button-primary" href="{{ url_for('contacts') }}">Обговорити проєкт ↗</a><a class="text-link" href="{{ url_for('services') }}">Переглянути послуги</a></div></section>
+    <section class="clean-stats"><div><strong>10+</strong><span>років досвіду</span></div><div><strong>120</strong><span>реалізованих проєктів</span></div><div><strong>24</strong><span>міста в портфоліо</span></div></section>
+    <section class="clean-section"><p class="eyebrow">Наш підхід</p><h2>Будуємо не просто стіни.<br><span>Створюємо основу для життя.</span></h2><p>Ми поєднуємо точність будівельних технологій із увагою до деталей, щоб кожен простір був красивим, надійним і зручним щодня.</p></section>
+    <section class="clean-cta"><div><p class="eyebrow">Є задум?</p><h2>Поговорімо про нього.</h2></div><a class="button-primary" href="{{ url_for('contacts') }}">Зв'язатися з нами ↗</a></section>
+</div>
 {% endblock %}
