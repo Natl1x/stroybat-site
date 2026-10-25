@@ -39,6 +39,8 @@ navigation?.querySelectorAll("a").forEach((link) => {
         if (url.origin !== window.location.origin || url.pathname === window.location.pathname) return;
 
         event.preventDefault();
+        navigation.querySelectorAll("a").forEach((item) => item.classList.remove("is-selected"));
+        link.classList.add("is-selected");
         await loadPage(url, true);
     });
 });

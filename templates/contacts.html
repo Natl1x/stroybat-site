@@ -3,6 +3,17 @@
 {% block title %}Контакти — StroyBat{% endblock %}
 
 {% block content %}
-<h1>Контакти</h1>
-<p>Зв’яжіться з нами, щоб обговорити ваш проєкт.</p>
+<section class="contact-page container">
+    <div class="contact-heading">
+        <p class="eyebrow">Будемо на зв'язку</p>
+        <h1>Розкажіть нам<br><span>про свій проєкт.</span></h1>
+        <p>Опишіть вашу ідею — ми повернемося з відповіддю протягом одного робочого дня.</p>
+    </div>
+    <div class="contact-grid">
+        <article class="contact-card"><span class="contact-card-icon glyphicon glyphicon-phone" aria-hidden="true"></span><p class="contact-label">Телефон</p><a href="tel:+380671234567">+38 (067) 123-45-67</a><small>Пн–Пт, 09:00–18:00</small></article>
+        <article class="contact-card"><span class="contact-card-icon glyphicon glyphicon-envelope" aria-hidden="true"></span><p class="contact-label">Електронна пошта</p><a href="mailto:hello@stroybat.ua">hello@stroybat.ua</a><small>Відповідаємо щодня</small></article>
+        <article class="contact-card"><span class="contact-card-icon glyphicon glyphicon-map-marker" aria-hidden="true"></span><p class="contact-label">Наш офіс</p><address>вул. Будівельна, 18<br>Київ, 01001</address><small>За попередньою домовленістю</small></article>
+    </div>
+    <div class="contact-bottom"><div><p class="contact-label">Соціальні мережі</p><div class="social-links"><a href="#">Instagram ↗</a><a href="#">Facebook ↗</a></div></div><a class="contact-action" href="mailto:hello@stroybat.ua">Написати нам <span>↗</span></a></div>
+</section>
 {% endblock %}

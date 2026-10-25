@@ -15,6 +15,26 @@
 
 html {
     scroll-behavior: smooth;
+    scrollbar-color: var(--color-accent) var(--color-header);
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 11px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-header);
+}
+
+::-webkit-scrollbar-thumb {
+    border: 3px solid var(--color-header);
+    border-radius: 10px;
+    background: var(--color-accent);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffe078;
 }
 
 body {
@@ -137,6 +157,22 @@ nav a {
     font-weight: 700;
     text-shadow: 0 0 0 transparent;
     transition: color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+nav a:focus,
+nav a:active,
+button:focus,
+button:active {
+    outline: none;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+nav a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
 }
 
 .nav-icon {
@@ -226,6 +262,8 @@ main {
 main h1 {
     max-width: 760px;
     margin: 0 0 20px;
+    font-family: "Manrope", Arial, sans-serif;
+    font-weight: 800;
     font-size: clamp(2.4rem, 6vw, 4.5rem);
     line-height: 1.08;
     letter-spacing: -0.045em;
@@ -274,7 +312,9 @@ footer p {
 
     header > a {
         flex: 1;
-        font-size: 1.15rem;
+        font-size: 1.3rem;
+        font-family: "Manrope", Arial, sans-serif;
+        font-weight: 800;
         letter-spacing: .1em;
     }
 
@@ -394,7 +434,9 @@ footer p {
         padding: 13px 14px;
         border-radius: 14px;
         color: var(--color-header-text);
-        font-size: clamp(1.45rem, 7vw, 1.95rem);
+        font-size: 0.95rem;
+        font-family: "Manrope", Arial, sans-serif;
+        font-weight: 700;
         letter-spacing: 0;
         opacity: 0;
         transform: translateY(18px);
@@ -429,6 +471,25 @@ footer p {
         box-shadow: 0 5px 18px rgb(242 200 75 / 20%);
     }
 
+    nav a.is-selected {
+        outline: 1px solid var(--color-accent);
+        outline-offset: -1px;
+        box-shadow: 0 0 9px rgb(242 200 75 / 70%), 0 0 20px rgb(242 200 75 / 28%);
+        animation: selected-link-glow 420ms ease-out both;
+    }
+
+    @keyframes selected-link-glow {
+        from {
+            outline-color: transparent;
+            box-shadow: 0 0 0 rgb(242 200 75 / 0%);
+        }
+
+        to {
+            outline-color: var(--color-accent);
+            box-shadow: 0 0 9px rgb(242 200 75 / 70%), 0 0 20px rgb(242 200 75 / 28%);
+        }
+    }
+
     nav a:hover::before,
     nav a:focus-visible::before,
     nav a.active::before {
@@ -450,7 +511,7 @@ footer p {
         width: 28px;
         margin: 0;
         color: currentColor;
-        font-size: 1.3rem;
+        font-size: 0.95rem;
         text-align: center;
         place-items: center;
     }
@@ -583,4 +644,49 @@ footer p {
         animation: none;
         transition: none;
     }
+}
+ .contact-page { padding-top:82px; padding-bottom:100px; }
+ .contact-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:40px; margin-bottom:58px; }
+ .contact-heading h1 { flex:1 1 55%; margin:0; }
+ .contact-heading h1 span { color:var(--color-accent); }
+ .contact-heading > p:last-child { flex:0 1 320px; margin-top:42px; color:var(--color-muted); }
+ .contact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+ .contact-card { min-height:230px; display:flex; flex-direction:column; padding:28px; border:1px solid var(--color-line); background:rgb(255 255 255 / 48%); transition:transform 220ms ease,background-color 220ms ease,box-shadow 220ms ease; }
+ .contact-card:hover { color:var(--color-header-text); background:var(--color-header); box-shadow:8px 8px 0 var(--color-accent); transform:translateY(-4px); }
+ .contact-card-icon { margin-bottom:32px; color:var(--color-accent); font-size:1.35rem; }
+ .contact-label { margin-bottom:10px; color:var(--color-muted); font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+ .contact-card:hover .contact-label,.contact-card:hover small { color:rgb(255 254 247 / 66%); }
+ .contact-card a,.contact-card address { margin-bottom:8px; color:var(--color-content-text); font-size:1.1rem; font-style:normal; font-weight:800; }
+ .contact-card:hover a,.contact-card:hover address { color:var(--color-header-text); }
+ .contact-card small { margin-top:auto; color:var(--color-muted); font-size:.78rem; }
+ .contact-bottom { display:flex; align-items:flex-end; justify-content:space-between; gap:30px; padding-top:36px; border-top:1px solid var(--color-line); }
+ .social-links { display:flex; gap:20px; }
+ .social-links a { color:var(--color-content-text); font-size:.88rem; font-weight:700; }
+ .social-links a:hover { color:var(--color-accent); }
+ .contact-action { display:inline-flex; align-items:center; gap:18px; padding:15px 20px; color:var(--color-header-text); background:var(--color-header); font-size:.85rem; font-weight:800; }
+ .contact-action:hover { color:var(--color-header); background:var(--color-accent); }
+ @media (max-width:640px) {
+ .contact-page { padding-top:58px; padding-bottom:70px; }
+ .contact-heading { display:block; margin-bottom:38px; }
+ .contact-heading > p:last-child { margin-top:24px; }
+ .contact-grid { grid-template-columns:1fr; gap:12px; }
+ .contact-card { min-height:190px; padding:23px; }
+ .contact-card-icon { margin-bottom:20px; }
+ .contact-bottom { align-items:flex-start; flex-direction:column; gap:26px; padding-top:28px; }
+ .contact-action { width:100%; justify-content:space-between; }
+ }
+.contact-heading h1 { font-size: clamp(3.2rem, 7vw, 6.2rem); }
+.contact-heading > p:last-child { font-size: 1.3rem; line-height: 1.55; }
+.contact-card { min-height: 280px; padding: 36px; }
+.contact-card-icon { font-size: 1.7rem; }
+.contact-label { font-size: .82rem; }
+.contact-card a,.contact-card address { font-size: 1.35rem; }
+.contact-card small { font-size: .9rem; }
+.social-links a { font-size: 1rem; }
+.contact-action { padding: 17px 24px; font-size: 1rem; }
+@media (max-width:640px) {
+ .contact-heading h1 { font-size: clamp(2.8rem, 12vw, 4rem); }
+ .contact-heading > p:last-child { font-size: 1.08rem; }
+ .contact-card { min-height: 215px; padding: 28px; }
+ .contact-card a,.contact-card address { font-size: 1.15rem; }
 }
