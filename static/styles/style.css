@@ -66,6 +66,13 @@ nav a {
     transition: color 220ms ease, text-shadow 220ms ease;
 }
 
+.nav-icon,
+.menu-toggle,
+.menu-close,
+.navigation-backdrop {
+    display: none;
+}
+
 nav a:hover,
 nav a:focus-visible {
     color: var(--color-header-text);
@@ -165,7 +172,113 @@ footer p {
     }
 
     nav {
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        width: min(82vw, 320px);
+        height: 100dvh;
+        padding: 26px 24px;
+        background: var(--color-header);
+        box-shadow: -12px 0 30px rgb(0 0 0 / 24%);
+        transform: translateX(105%);
+        visibility: hidden;
+        will-change: transform;
+        transition: transform 320ms cubic-bezier(.22, .61, .36, 1), visibility 0s linear 320ms;
+    }
+
+    nav.is-open {
+        visibility: visible;
+        transform: translateX(0);
+        transition-delay: 0s;
+    }
+
+    nav ul {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 52px;
+    }
+
+    nav li,
+    nav a {
         width: 100%;
+    }
+
+    nav a {
+        padding: 13px 10px;
+        border-bottom: 1px solid rgb(255 255 255 / 12%);
+    }
+
+    /* На мобільному активний пункт позначається кольором, без desktop-смужки. */
+    nav ul::after,
+    nav ul.has-active::after {
+        display: none;
+    }
+
+    .nav-icon {
+        display: inline-grid;
+        width: 28px;
+        margin-right: 8px;
+        color: var(--color-accent);
+        font-size: 1.15rem;
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: flex;
+        width: 42px;
+        height: 38px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+        border: 1px solid rgb(255 255 255 / 24%);
+        border-radius: 4px;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .menu-toggle span {
+        display: block;
+        width: 19px;
+        height: 2px;
+        background: var(--color-header-text);
+    }
+
+    .menu-close {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        display: block;
+        padding: 0;
+        border: 0;
+        color: var(--color-header-text);
+        background: transparent;
+        font-size: 2rem;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .navigation-backdrop {
+        position: fixed;
+        z-index: 9;
+        inset: 0;
+        display: block;
+        background: rgb(0 0 0 / 48%);
+        opacity: 0;
+        pointer-events: none;
+        will-change: opacity;
+        transition: opacity 260ms ease;
+    }
+
+    body.menu-open .navigation-backdrop {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    body.menu-open {
+        overflow: hidden;
     }
 
     nav ul {
@@ -185,5 +298,12 @@ footer p {
 
     footer {
         padding: 18px 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    nav,
+    .navigation-backdrop {
+        transition: none;
     }
 }

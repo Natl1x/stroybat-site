@@ -1,5 +1,26 @@
 const navigationList = document.querySelector("nav ul");
 const activeLink = navigationList?.querySelector("a.active");
+const menuButton = document.querySelector(".menu-toggle");
+const menuCloseButtons = document.querySelectorAll("[data-menu-close]");
+const navigation = document.querySelector("#site-navigation");
+
+const closeMenu = () => {
+    navigation?.classList.remove("is-open");
+    menuButton?.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("menu-open");
+};
+
+menuButton?.addEventListener("click", () => {
+    navigation?.classList.add("is-open");
+    menuButton.setAttribute("aria-expanded", "true");
+    document.body.classList.add("menu-open");
+});
+
+menuCloseButtons.forEach((button) => button.addEventListener("click", closeMenu));
+navigation?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMenu();
+});
 
 if (navigationList && activeLink) {
     const listBounds = navigationList.getBoundingClientRect();
