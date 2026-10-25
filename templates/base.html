@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}StroyBat{% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
 <body>
@@ -18,6 +21,7 @@
         <div class="navigation-backdrop" data-menu-close></div>
         <nav id="site-navigation" aria-label="Головна навігація">
             <button class="menu-close" type="button" data-menu-close aria-label="Закрити навігацію">&times;</button>
+            <div class="menu-heading">Вибір сторінки</div>
             <ul>
                 <li><a href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}class="active" aria-current="page"{% endif %}><span class="nav-icon glyphicon glyphicon-home" aria-hidden="true"></span>Головна</a></li>
                 <li><a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active" aria-current="page"{% endif %}><span class="nav-icon glyphicon glyphicon-info-sign" aria-hidden="true"></span>Про нас</a></li>

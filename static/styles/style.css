@@ -24,8 +24,81 @@ body {
     flex-direction: column;
     color: var(--color-content-text);
     background: var(--color-content);
-    font-family: Arial, sans-serif;
+    font-family: "Manrope", Arial, sans-serif;
     line-height: 1.6;
+}
+
+@media (min-width: 641px) {
+    body {
+        background-color: var(--color-content);
+        background-image: linear-gradient(rgb(32 34 35 / 3%) 1px, transparent 1px), linear-gradient(90deg, rgb(32 34 35 / 3%) 1px, transparent 1px);
+        background-size: 36px 36px;
+    }
+
+    header {
+        min-height: 78px;
+        border-bottom: 1px solid rgb(242 200 75 / 22%);
+        box-shadow: 0 8px 22px rgb(0 0 0 / 16%);
+    }
+
+    header > a {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.45rem;
+        letter-spacing: .12em;
+    }
+
+    header > a::before {
+        width: 8px;
+        height: 28px;
+        background: var(--color-accent);
+        box-shadow: 0 0 14px rgb(242 200 75 / 45%);
+        content: "";
+    }
+
+    nav ul {
+        gap: 5px;
+        padding: 4px;
+        border: 1px solid rgb(255 255 255 / 12%);
+        border-radius: 7px;
+        background: rgb(255 255 255 / 4%);
+    }
+
+    nav a {
+        border-radius: 4px;
+        transition: color 220ms ease, background-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 15px rgb(242 200 75 / 16%);
+    }
+
+    nav a.active {
+        box-shadow: 0 5px 15px rgb(242 200 75 / 12%);
+    }
+
+    main {
+        padding-top: clamp(72px, 9vw, 132px);
+        padding-bottom: clamp(72px, 9vw, 132px);
+    }
+
+    main h1 {
+        max-width: 900px;
+        font-weight: 800;
+        text-wrap: balance;
+    }
+
+    main p {
+        font-size: 1.2rem;
+        text-wrap: pretty;
+    }
+
+    footer {
+        box-shadow: 0 -8px 22px rgb(0 0 0 / 12%);
+    }
 }
 
 header {
@@ -79,6 +152,10 @@ nav a {
 .menu-toggle,
 .menu-close,
 .navigation-backdrop {
+    display: none;
+}
+
+.menu-heading {
     display: none;
 }
 
@@ -180,33 +257,60 @@ footer p {
 }
 
 @media (max-width: 640px) {
+    body {
+        background-color: var(--color-content);
+        background-image: linear-gradient(rgb(32 34 35 / 3%) 1px, transparent 1px), linear-gradient(90deg, rgb(32 34 35 / 3%) 1px, transparent 1px);
+        background-size: 28px 28px;
+    }
+
     header {
         align-items: center;
         flex-direction: row;
         gap: 16px;
         padding: 16px 20px;
+        border-bottom: 1px solid rgb(242 200 75 / 24%);
+        box-shadow: 0 6px 18px rgb(0 0 0 / 18%);
     }
 
     header > a {
         flex: 1;
+        font-size: 1.15rem;
+        letter-spacing: .1em;
+    }
+
+    header > a::before {
+        display: inline-block;
+        width: 5px;
+        height: 22px;
+        margin-right: 8px;
+        background: var(--color-accent);
+        box-shadow: 0 0 10px rgb(242 200 75 / 45%);
+        content: "";
+        vertical-align: -5px;
     }
 
     nav {
         position: fixed;
         z-index: 10;
-        top: 0;
-        right: 0;
-        width: min(82vw, 320px);
-        height: 100dvh;
-        padding: 26px 24px;
-        background: var(--color-header);
-        box-shadow: -12px 0 30px rgb(0 0 0 / 24%);
-        transform: translate3d(110%, 0, 0);
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
+        width: auto;
+        height: auto;
+        max-height: calc(100dvh - 105px);
+        padding: 28px 20px 22px;
+        overflow-y: auto;
+        border: 1px solid rgb(255 255 255 / 14%);
+        border-radius: 24px;
+        background: linear-gradient(145deg, rgb(39 43 44 / 98%), rgb(20 22 22 / 99%));
+        box-shadow: 0 20px 55px rgb(0 0 0 / 42%), inset 0 1px 0 rgb(255 255 255 / 8%);
+        transform: translate3d(0, calc(100% + 35px), 0) scale(.96);
+        transform-origin: bottom center;
         visibility: hidden;
         opacity: 0;
         pointer-events: none;
-        will-change: transform;
-        transition: transform 420ms cubic-bezier(.22, .61, .36, 1), opacity 260ms ease, visibility 0s linear 420ms;
+        will-change: transform, opacity;
+        transition: transform 460ms cubic-bezier(.22, .61, .36, 1), opacity 280ms ease, visibility 0s linear 460ms;
     }
 
     nav.is-open {
@@ -215,36 +319,121 @@ footer p {
         pointer-events: auto;
         transform: translate3d(0, 0, 0);
         transition-delay: 0s;
-        animation: drawer-slide-in 420ms cubic-bezier(.22, .61, .36, 1) both;
+        animation: drawer-slide-in 460ms cubic-bezier(.22, .61, .36, 1) both;
+    }
+
+    nav.is-closing {
+        visibility: visible;
+        opacity: 0;
+        pointer-events: none;
+        animation: drawer-slide-out 460ms cubic-bezier(.22, .61, .36, 1) both;
+        transform: translate3d(0, calc(100% + 35px), 0) scale(.96);
+        transition: transform 460ms cubic-bezier(.22, .61, .36, 1), opacity 280ms ease;
+    }
+
+    @keyframes drawer-slide-out {
+        from {
+            visibility: visible;
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+        }
+
+        to {
+            visibility: visible;
+            opacity: 0;
+            transform: translate3d(0, calc(100% + 35px), 0) scale(.96);
+        }
     }
 
     @keyframes drawer-slide-in {
         from {
-            transform: translate3d(110%, 0, 0);
+            transform: translate3d(0, calc(100% + 35px), 0) scale(.96);
             opacity: 0;
         }
 
         to {
-            transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0) scale(1);
             opacity: 1;
         }
     }
 
     nav ul {
-        align-items: stretch;
+        position: relative;
+        z-index: 1;
+        align-items: center;
         flex-direction: column;
-        gap: 8px;
-        margin-top: 52px;
+        gap: 6px;
+        margin-top: 26px;
+        width: 100%;
+    }
+
+    .menu-heading {
+        position: absolute;
+        top: 21px;
+        right: 0;
+        left: 0;
+        display: block;
+        color: var(--color-accent);
+        font-size: 0.9rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-align: center;
+        text-transform: uppercase;
     }
 
     nav li,
     nav a {
-        width: 100%;
+        width: min(100%, 340px);
     }
 
     nav a {
-        padding: 13px 10px;
-        border-bottom: 1px solid rgb(255 255 255 / 12%);
+        display: grid;
+        grid-template-columns: 3px 28px minmax(0, 1fr);
+        align-items: center;
+        column-gap: 0;
+        padding: 13px 14px;
+        border-radius: 14px;
+        color: var(--color-header-text);
+        font-size: clamp(1.45rem, 7vw, 1.95rem);
+        letter-spacing: 0;
+        opacity: 0;
+        transform: translateY(18px);
+        transition: color 180ms ease, background-color 180ms ease, opacity 350ms ease, transform 350ms ease;
+    }
+
+    nav a::before {
+        grid-column: 1;
+        grid-row: 1;
+        flex: none;
+        display: block;
+        width: 3px;
+        height: 22px;
+        margin-right: 11px;
+        border-radius: 3px;
+        background: var(--color-accent);
+        content: "";
+        opacity: .8;
+        vertical-align: -2px;
+    }
+
+    nav.is-open li:nth-child(1) a { opacity: 1; transform: translateY(0); transition-delay: 180ms; }
+    nav.is-open li:nth-child(2) a { opacity: 1; transform: translateY(0); transition-delay: 240ms; }
+    nav.is-open li:nth-child(3) a { opacity: 1; transform: translateY(0); transition-delay: 300ms; }
+    nav.is-open li:nth-child(4) a { opacity: 1; transform: translateY(0); transition-delay: 360ms; }
+
+    nav a:hover,
+    nav a:focus-visible,
+    nav a.active {
+        color: var(--color-header);
+        background: var(--color-accent);
+        box-shadow: 0 5px 18px rgb(242 200 75 / 20%);
+    }
+
+    nav a:hover::before,
+    nav a:focus-visible::before,
+    nav a.active::before {
+        background: var(--color-header);
+        box-shadow: 0 0 5px rgb(29 31 32 / 35%);
     }
 
     /* На мобільному активний пункт позначається кольором, без desktop-смужки. */
@@ -255,11 +444,15 @@ footer p {
 
     .nav-icon {
         display: inline-grid;
+        grid-column: 2;
+        grid-row: 1;
+        flex: none;
         width: 28px;
-        margin-right: 8px;
-        color: var(--color-accent);
-        font-size: 1.15rem;
+        margin: 0;
+        color: currentColor;
+        font-size: 1.3rem;
         text-align: center;
+        place-items: center;
     }
 
     .menu-toggle {
@@ -301,7 +494,7 @@ footer p {
         border-radius: 3px;
         background: var(--color-accent) !important;
         box-shadow: 0 0 5px rgb(242 200 75 / 65%), 0 0 11px rgb(242 200 75 / 30%);
-        transition: background-color 180ms ease, box-shadow 180ms ease;
+        transition: background-color 180ms ease, box-shadow 180ms ease, transform 220ms ease, opacity 180ms ease;
     }
 
     .menu-toggle:hover .menu-line,
@@ -310,18 +503,31 @@ footer p {
         box-shadow: 0 0 9px rgb(255 244 189 / 90%);
     }
 
+    body.menu-open .menu-toggle .menu-line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    body.menu-open .menu-toggle .menu-line:nth-child(2) { opacity: 0; }
+    body.menu-open .menu-toggle .menu-line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
     .menu-close {
         position: absolute;
-        top: 16px;
-        right: 20px;
-        display: block;
+        z-index: 5;
+        top: 7px;
+        right: 18px;
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
         padding: 0;
         border: 0;
         color: var(--color-header-text);
         background: transparent;
-        font-size: 2rem;
+        font-size: 2.25rem;
         line-height: 1;
         cursor: pointer;
+        border: 1px solid rgb(255 255 255 / 18%);
+        border-radius: 50%;
+        text-align: center;
+        pointer-events: auto;
+        touch-action: manipulation;
     }
 
     .navigation-backdrop {
@@ -368,6 +574,13 @@ footer p {
 @media (prefers-reduced-motion: reduce) {
     nav,
     .navigation-backdrop {
+        transition: none;
+    }
+}
+
+@media (max-width: 640px) {
+    body.menu-restored nav.is-open {
+        animation: none;
         transition: none;
     }
 }
