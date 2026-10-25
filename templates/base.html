@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}StroyBat{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('home') }}" aria-label="StroyBat — головна">StroyBat</a>
+        <nav aria-label="Головна навігація">
+            <ul>
+                <li><a href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}class="active" aria-current="page"{% endif %}>Головна</a></li>
+                <li><a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active" aria-current="page"{% endif %}>Про нас</a></li>
+                <li><a href="{{ url_for('services') }}" {% if request.endpoint == 'services' %}class="active" aria-current="page"{% endif %}>Послуги</a></li>
+                <li><a href="{{ url_for('contacts') }}" {% if request.endpoint == 'contacts' %}class="active" aria-current="page"{% endif %}>Контакти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {{ current_year }} StroyBat</p>
+    </footer>
+    <script src="{{ url_for('static', filename='scripts/navigation.js') }}" defer></script>
+</body>
+</html>
