@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}StroyBat{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
 <body>
     <header>
         <a href="{{ url_for('home') }}" aria-label="StroyBat — головна">StroyBat</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Відкрити навігацію">
-            <span></span><span></span><span></span>
+            <span class="menu-line" aria-hidden="true"></span>
+            <span class="menu-line" aria-hidden="true"></span>
+            <span class="menu-line" aria-hidden="true"></span>
         </button>
         <div class="navigation-backdrop" data-menu-close></div>
         <nav id="site-navigation" aria-label="Головна навігація">
             <button class="menu-close" type="button" data-menu-close aria-label="Закрити навігацію">&times;</button>
             <ul>
-                <li><a href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}class="active" aria-current="page"{% endif %}><span class="nav-icon" aria-hidden="true">⌂</span>Головна</a></li>
-                <li><a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active" aria-current="page"{% endif %}><span class="nav-icon" aria-hidden="true">◉</span>Про нас</a></li>
-                <li><a href="{{ url_for('services') }}" {% if request.endpoint == 'services' %}class="active" aria-current="page"{% endif %}><span class="nav-icon" aria-hidden="true">▦</span>Послуги</a></li>
-                <li><a href="{{ url_for('contacts') }}" {% if request.endpoint == 'contacts' %}class="active" aria-current="page"{% endif %}><span class="nav-icon" aria-hidden="true">✆</span>Контакти</a></li>
+                <li><a href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}class="active" aria-current="page"{% endif %}><span class="nav-icon glyphicon glyphicon-home" aria-hidden="true"></span>Головна</a></li>
+                <li><a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active" aria-current="page"{% endif %}><span class="nav-icon glyphicon glyphicon-info-sign" aria-hidden="true"></span>Про нас</a></li>
+                <li><a href="{{ url_for('services') }}" {% if request.endpoint == 'services' %}class="active" aria-current="page"{% endif %}><span class="nav-icon glyphicon glyphicon-th-list" aria-hidden="true"></span>Послуги</a></li>
+                <li><a href="{{ url_for('contacts') }}" {% if request.endpoint == 'contacts' %}class="active" aria-current="page"{% endif %}><span class="nav-icon glyphicon glyphicon-phone" aria-hidden="true"></span>Контакти</a></li>
             </ul>
         </nav>
     </header>

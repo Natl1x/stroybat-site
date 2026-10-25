@@ -11,7 +11,10 @@ const closeMenu = () => {
 };
 
 menuButton?.addEventListener("click", () => {
-    navigation?.classList.add("is-open");
+    if (!navigation) return;
+    navigation.classList.remove("is-open");
+    void navigation.offsetWidth;
+    requestAnimationFrame(() => navigation.classList.add("is-open"));
     menuButton.setAttribute("aria-expanded", "true");
     document.body.classList.add("menu-open");
 });
